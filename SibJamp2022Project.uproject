@@ -7,7 +7,11 @@
 		{
 			"Name": "SibJamp2022Project",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"JamMenuSystem"
+			]
 		}
 	],
 	"Plugins": [
