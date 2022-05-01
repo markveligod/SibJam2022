@@ -84,7 +84,7 @@ void UWarmManager::ReduceTemperature()
     this->SetupValuePercent(this->Percent - this->Damage);
     if (this->Percent == 0.0f)
     {
-        this->GameMode->ChangeGameState(EStateGamePlay::GameOver);
+        this->GameMode->ChangeGameState(EStateGamePlay::GameLose);
     }
 }
 

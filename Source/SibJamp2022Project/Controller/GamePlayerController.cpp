@@ -12,6 +12,16 @@ AGamePlayerController::AGamePlayerController()
     this->WindManager = CreateDefaultSubobject<UWindManager>(FName("Wind Manager"));
 }
 
+void AGamePlayerController::BeginPlay()
+{
+    Super::BeginPlay();
+
+    this->GameMode = ASibJamp2022ProjectGameModeBase::Get(GetWorld());
+    if (!CHECK(this->GameMode != nullptr, FString("Game mode is nullptr"))) return;
+
+    this->GameMode->OnChangeGameState.AddDynamic(this, &AGamePlayerController::OnChangeGamePlayState);
+}
+
 void AGamePlayerController::SetupInputComponent()
 {
     Super::SetupInputComponent();
@@ -28,4 +38,16 @@ void AGamePlayerController::RegisterInteract()
 {
     LOGJAM(ELogVerb::Display, "Press interact");
     OnInteract.Broadcast();
+}
+
+void AGamePlayerController::OnChangeGamePlayState(EStateGamePlay NewState)
+{
+    if (NewState == EStateGamePlay::GameProgress)
+    {
+        SetInputMode(FInputModeGameOnly());
+    }
+    else
+    {
+        SetInputMode(FInputModeUIOnly());
+    }
 }

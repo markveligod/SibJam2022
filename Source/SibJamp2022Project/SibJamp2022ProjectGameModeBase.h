@@ -12,7 +12,8 @@ enum EStateGamePlay
     None = 0,
     Intro,
     GameProgress,
-    GameOver
+    GameWin,
+    GameLose
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameStateSignature, EStateGamePlay, GameState);

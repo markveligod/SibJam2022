@@ -3,9 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SibJamp2022ProjectGameModeBase.h"
 #include "GameFramework/PlayerController.h"
 #include "GamePlayerController.generated.h"
 
+class ASibJamp2022ProjectGameModeBase;
 class UWindManager;
 class UWarmManager;
 
@@ -28,10 +30,19 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
     UWindManager* WindManager;
 
-    virtual void SetupInputComponent() override;
 
+    virtual void BeginPlay() override;
+    virtual void SetupInputComponent() override;
+    
     FInteractSignature OnInteract;
 
 private:
+    UPROPERTY()
+    ASibJamp2022ProjectGameModeBase* GameMode;
+    
     void RegisterInteract();
+
+    //
+    UFUNCTION()
+    void OnChangeGamePlayState(EStateGamePlay NewState);
 };
