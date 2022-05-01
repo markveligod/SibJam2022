@@ -28,6 +28,18 @@ public:
     // Get temperature from percent
     float CalculateTemperature() const;
 
+    // Setup new value percent
+    void SetupValuePercent(float NewValue);
+
+    // Reset Timer damage
+    void ResetTimerDamage();
+
+    // Start timer damage
+    void StartTimerDamage();
+
+    // Warm upper
+    void WarmUpper(float UpValue);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

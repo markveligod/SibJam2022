@@ -24,6 +24,34 @@ float UWarmManager::CalculateTemperature() const
     return UKismetMathLibrary::MapRangeClamped(this->Percent, 0.0f, 100.0f, this->RangeTemperature.Min, this->RangeTemperature.Max);
 }
 
+void UWarmManager::SetupValuePercent(float NewValue)
+{
+    this->Percent = FMath::Clamp(NewValue, 0.0f, 100.0f);
+}
+
+void UWarmManager::ResetTimerDamage()
+{
+    if (GetWorld()->GetTimerManager().TimerExists(this->TimerHandleDamage))
+    {
+        LOGJAM(ELogVerb::Display, "Reset timer");
+        GetWorld()->GetTimerManager().ClearTimer(this->TimerHandleDamage);
+    }
+}
+
+void UWarmManager::StartTimerDamage()
+{
+    if (!GetWorld()->GetTimerManager().TimerExists(this->TimerHandleDamage))
+    {
+        LOGJAM(ELogVerb::Display, "Start timer");
+        GetWorld()->GetTimerManager().SetTimer(this->TimerHandleDamage, this, &UWarmManager::ReduceTemperature, this->RateTimeCall, true);
+    }
+}
+
+void UWarmManager::WarmUpper(float UpValue)
+{
+    this->SetupValuePercent(this->Percent + UpValue);
+}
+
 // Called when the game starts
 void UWarmManager::BeginPlay()
 {
@@ -54,8 +82,7 @@ void UWarmManager::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 
 void UWarmManager::ReduceTemperature()
 {
-    this->Percent = FMath::Clamp(this->Percent - this->Damage, 0.0f, 100.0f);
-    LOGJAM(ELogVerb::Display, FString::Printf(TEXT("New percent: %f"), this->Percent));
+    this->SetupValuePercent(this->Percent - this->Damage);
     if (this->Percent == 0.0f)
     {
         this->GameMode->ChangeGameState(EStateGamePlay::GameOver);
@@ -64,13 +91,10 @@ void UWarmManager::ReduceTemperature()
 
 void UWarmManager::OnChangeGamePlayState(EStateGamePlay NewState)
 {
-    if (GetWorld()->GetTimerManager().TimerExists(this->TimerHandleDamage))
-    {
-        GetWorld()->GetTimerManager().ClearTimer(this->TimerHandleDamage);
-    }
+    this->ResetTimerDamage();
 
     if (NewState == EStateGamePlay::GameProgress)
     {
-       GetWorld()->GetTimerManager().SetTimer(this->TimerHandleDamage, this, &UWarmManager::ReduceTemperature, this->RateTimeCall, true);
+        this->StartTimerDamage();
     }
 }

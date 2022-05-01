@@ -17,7 +17,10 @@ class SIBJAMP2022PROJECT_API AGamePlayerController : public APlayerController
 
     AGamePlayerController();
 
-protected:
+public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
     UWarmManager* WarmManager;
+
+
+
 };
