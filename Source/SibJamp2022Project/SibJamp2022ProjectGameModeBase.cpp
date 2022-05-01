@@ -9,7 +9,13 @@ void ASibJamp2022ProjectGameModeBase::BeginPlay()
 {
     Super::BeginPlay();
 
-    ChangeGameState(EStateGamePlay::Intro);
+    FTimerHandle TimerHandle;
+    FTimerDelegate TimerDelegate;
+    TimerDelegate.BindLambda([this]()
+    {
+        ChangeGameState(EStateGamePlay::GameProgress);
+    });
+    GetWorldTimerManager().SetTimer(TimerHandle, TimerDelegate, 1.0f, false);
 }
 
 void ASibJamp2022ProjectGameModeBase::ChangeGameState(EStateGamePlay NewState)
