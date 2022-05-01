@@ -27,6 +27,7 @@ void ASibJamp2022ProjectGameModeBase::ChangeGameState(EStateGamePlay NewState)
         return;
     }
 
+    LOGJAM(ELogVerb::Display, FString::Printf(TEXT("New game play state: %s"), *UEnum::GetValueAsString(NewState)));
     this->StateGamePlay = NewState;
     this->OnChangeGameState.Broadcast(NewState);
 }

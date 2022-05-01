@@ -7,6 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "WarmManager.generated.h"
 
+class AGamePlayerController;
 class ASibJamp2022ProjectGameModeBase;
 USTRUCT(BlueprintType)
 struct FRangeTemperature : public FFloatInterval
@@ -43,13 +44,25 @@ protected:
         DisplayName = "Диапозон температуры"))
     FRangeTemperature RangeTemperature;
 
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Data Component", meta = (ClampMin = "0.1", ClampMax = "0.9",
+        DisplayName = "Множитель температуры"))
+    float MultiplierTemperature = 0.5f;
+
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
 private:
 
     UPROPERTY()
     ASibJamp2022ProjectGameModeBase* GameMode;
+
+    UPROPERTY()
+    AGamePlayerController* PlayerController;
     
     // Current Percent warm
     float Percent = 100.0f;
+
+    // Current damage
+    float Damage = 0.0f;
 
     FTimerHandle TimerHandleDamage;
     
