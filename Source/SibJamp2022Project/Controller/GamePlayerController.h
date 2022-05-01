@@ -6,7 +6,11 @@
 #include "GameFramework/PlayerController.h"
 #include "GamePlayerController.generated.h"
 
+class UWindManager;
 class UWarmManager;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInteractSignature);
+
 /**
  * 
  */
@@ -20,7 +24,14 @@ class SIBJAMP2022PROJECT_API AGamePlayerController : public APlayerController
 public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
     UWarmManager* WarmManager;
+    
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+    UWindManager* WindManager;
 
+    virtual void SetupInputComponent() override;
 
+    FInteractSignature OnInteract;
 
+private:
+    void RegisterInteract();
 };

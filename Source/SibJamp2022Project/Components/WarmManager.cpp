@@ -2,7 +2,6 @@
 
 
 #include "Components/WarmManager.h"
-
 #include "Controller/GamePlayerController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -59,7 +58,7 @@ void UWarmManager::BeginPlay()
 
     this->GameMode = ASibJamp2022ProjectGameModeBase::Get(GetWorld());
     if (!CHECK(this->GameMode != nullptr, FString("Game mode is nullptr"))) return;
-    this->PlayerController = Cast<AGamePlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+    this->PlayerController = Cast<AGamePlayerController>(GetOwner());
     if (!CHECK(this->PlayerController != nullptr, FString("Player Controller is nullptr"))) return;
     
     this->GameMode->OnChangeGameState.AddDynamic(this, &UWarmManager::OnChangeGamePlayState);
