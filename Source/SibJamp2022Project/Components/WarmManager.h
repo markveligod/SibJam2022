@@ -40,6 +40,9 @@ public:
     // Warm upper
     void WarmUpper(float UpValue);
 
+    UFUNCTION(BlueprintPure)
+    float GetValuePercent() const { return this->Percent; }
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

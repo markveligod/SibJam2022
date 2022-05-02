@@ -16,4 +16,8 @@ class SIBJAMP2022PROJECT_API UGameLoseUserWidget : public UUserWidgetBase
     
 protected:
     virtual void OnStart() override;
+
+private:
+    UPROPERTY(Transient, meta = (BindWidgetAnim))
+    UWidgetAnimation* LoseAnim;
 };
