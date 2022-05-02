@@ -27,8 +27,9 @@ public:
     void StartWind(float NewPercentForce, EDirectionWind NewDirection, float NewRateTime);
     void ResetWind();
 
-    
+    UPROPERTY(BlueprintReadOnly)
     EDirectionWind DirectionWind = EDirectionWind::None;
+    UPROPERTY(BlueprintReadOnly)
     float PercentForce;
     float RateTimerCallReset;
 protected:

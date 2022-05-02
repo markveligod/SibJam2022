@@ -1,14 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "GameJamHUD.h"
-
 #include "Components/CapsuleComponent.h"
 #include "Components/WarmManager.h"
 #include "Components/WindManager.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 #include "Library/JamMSFunctionLibrary.h"
-#include "Menu/HUD/UI/CreditsUserWidget.h"
 #include "SibJamp2022Project/SibJamp2022ProjectGameModeBase.h"
 #include "UI/UserWidgetBase.h"
 
@@ -16,7 +14,7 @@ inline void AGameJamHUD::DrawHUD()
 {
     Super::DrawHUD();
 #if UE_EDITOR
-    if (this->GameMode && EnableDebugHUD)
+    if (this->GameMode && EnableDebugHUD && this->GameMode->GetStateGamePlay() == EStateGamePlay::GameProgress)
     {
         AddText(TEXT("----Stat Pawn----"), FText());
         FVector Loc = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn()->GetActorLocation();

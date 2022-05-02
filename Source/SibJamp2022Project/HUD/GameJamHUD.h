@@ -16,6 +16,10 @@ class SIBJAMP2022PROJECT_API AGameJamHUD : public ADebugHUD
 {
 	GENERATED_BODY()
 
+public:
+    UFUNCTION(BlueprintPure)
+    TMap<EStateGamePlay, UUserWidgetBase*> GetRepoWidgets() const { return this->RepoWidgets; }
+    
 protected:
     // Draw the HUD.
     virtual void DrawHUD() override;
