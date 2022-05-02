@@ -7,7 +7,7 @@
 #include "SibJamp2022ProjectGameModeBase.generated.h"
 
 UENUM(BlueprintType)
-enum EStateGamePlay
+enum class EStateGamePlay: uint8
 {
     None = 0,
     Intro,
@@ -31,7 +31,8 @@ public:
     static ASibJamp2022ProjectGameModeBase* Get(UWorld* World) { return (World) ? Cast<ASibJamp2022ProjectGameModeBase>(World->GetAuthGameMode()) : nullptr; }
 
     virtual void BeginPlay() override;
-    
+
+    UPROPERTY(BlueprintAssignable)
     FGameStateSignature OnChangeGameState;
 
     UFUNCTION(BlueprintCallable)
