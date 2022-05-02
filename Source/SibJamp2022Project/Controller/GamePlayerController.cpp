@@ -45,9 +45,11 @@ void AGamePlayerController::OnChangeGamePlayState(EStateGamePlay NewState)
     if (NewState == EStateGamePlay::GameProgress)
     {
         SetInputMode(FInputModeGameOnly());
+        SetShowMouseCursor(false);
     }
     else
     {
         SetInputMode(FInputModeUIOnly());
+        SetShowMouseCursor(true);
     }
 }

@@ -10,7 +10,8 @@
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine",
-				"JamMenuSystem"
+				"JamMenuSystem",
+				"UMG"
 			]
 		}
 	],
@@ -258,15 +259,7 @@
 			"Enabled": false
 		},
 		{
-			"Name": "ImgMedia",
-			"Enabled": false
-		},
-		{
 			"Name": "WebMMoviePlayer",
-			"Enabled": false
-		},
-		{
-			"Name": "WmfMedia",
 			"Enabled": false
 		},
 		{
@@ -473,6 +466,10 @@
 				"Android",
 				"HoloLens"
 			]
+		},
+		{
+			"Name": "MediaFrameworkUtilities",
+			"Enabled": true
 		}
 	]
 }

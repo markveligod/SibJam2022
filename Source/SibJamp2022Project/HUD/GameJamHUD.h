@@ -3,10 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SibJamp2022ProjectGameModeBase.h"
 #include "Game/HUD/DebugHUD.h"
 #include "GameJamHUD.generated.h"
 
-class ASibJamp2022ProjectGameModeBase;
+class UUserWidgetBase;
 /**
  * 
  */
@@ -21,8 +22,29 @@ protected:
 
     /** Overridable native event for when play begins for this actor. */
     virtual void BeginPlay() override;
+    
+    UPROPERTY(EditDefaultsOnly, Category = "UI")
+    TSubclassOf<UUserWidgetBase> IntroWidget;
+    UPROPERTY(EditDefaultsOnly, Category = "UI")
+    TSubclassOf<UUserWidgetBase> GameWidget;
+    UPROPERTY(EditDefaultsOnly, Category = "UI")
+    TSubclassOf<UUserWidgetBase> WinWidget;
+    UPROPERTY(EditDefaultsOnly, Category = "UI")
+    TSubclassOf<UUserWidgetBase> LoseWidget;
 
 private:
+
+    UPROPERTY()
+    TMap<EStateGamePlay, UUserWidgetBase*> RepoWidgets;
+
+    UPROPERTY()
+    UUserWidgetBase* VisibleWidget = nullptr;
+    
     UPROPERTY()
     ASibJamp2022ProjectGameModeBase* GameMode;
+
+    UFUNCTION()
+    void OnGameStateChanged(EStateGamePlay NewState);
+
+    void SetupNewWidget(UUserWidgetBase* NewWidget);
 };

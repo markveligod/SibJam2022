@@ -30,7 +30,6 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
     UWindManager* WindManager;
 
-
     virtual void BeginPlay() override;
     virtual void SetupInputComponent() override;
 
