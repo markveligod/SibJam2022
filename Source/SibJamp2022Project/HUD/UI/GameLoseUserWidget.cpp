@@ -18,9 +18,8 @@ void UGameLoseUserWidget::OnStart()
     if (!CHECK(GameInst != nullptr, FString("Game inst is nullptr"))) return;
 
     ACharacter* Character = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-
+    APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
     Character->GetCharacterMovement()->DisableMovement();
-    Character->GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
     Character->GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
     Character->GetMesh()->SetSimulatePhysics(true);
     
