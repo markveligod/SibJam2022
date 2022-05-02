@@ -38,11 +38,11 @@ protected:
     UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Actor Settings", meta = (DisplayName = "Мэш объекта"))
     UStaticMesh* Mesh = nullptr;
 
-    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Actor Settings", meta = (ClampMin = "0.1", ClampMax = "60.0",
+    UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Actor Settings", meta = (ClampMin = "0.1", ClampMax = "60.0",
         DisplayName = "Частота вызова", Units = "s"))
     float RateTimeCall = 1.0f;
 
-    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Actor Settings", meta = (ClampMin = "0.1", ClampMax = "100.0",
+    UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Actor Settings", meta = (ClampMin = "0.1", ClampMax = "100.0",
         DisplayName = "Процент восстановления", Units = "%"))
     float UnitUpWarm = 1.0f;
 

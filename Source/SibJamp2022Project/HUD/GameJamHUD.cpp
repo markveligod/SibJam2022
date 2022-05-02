@@ -2,8 +2,10 @@
 
 #include "GameJamHUD.h"
 
+#include "Components/CapsuleComponent.h"
 #include "Components/WarmManager.h"
 #include "Components/WindManager.h"
+#include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 #include "Library/JamMSFunctionLibrary.h"
 #include "SibJamp2022Project/SibJamp2022ProjectGameModeBase.h"
@@ -16,7 +18,9 @@ inline void AGameJamHUD::DrawHUD()
     {
         AddText(TEXT("----Stat Pawn----"), FText());
         FVector Loc = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn()->GetActorLocation();
+        FRotator RotCap = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetCharacter()->GetCapsuleComponent()->GetComponentRotation();
         AddText(TEXT("Location:"), FText::FromString(Loc.ToString()));
+        AddText(TEXT("Capsule rotation:"), FText::FromString(RotCap.ToString()));
         FVector Velocity = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn()->GetVelocity();
         AddText(TEXT("Vector velocity:"), FText::FromString(Velocity.ToString()));
         const float SpeedPawn = Velocity.Size();

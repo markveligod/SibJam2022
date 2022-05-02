@@ -69,6 +69,8 @@ void UWarmManager::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 {
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+    if (!this->PlayerController) return;
+    if (!this->PlayerController->GetPawn()) return;
     if (this->PlayerController->GetPawn()->GetVelocity().Size() > 300.0f)
     {
         this->Damage = this->UnitDamage * this->MultiplierTemperature;
