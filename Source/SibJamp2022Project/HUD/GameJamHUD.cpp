@@ -10,7 +10,7 @@
 #include "SibJamp2022Project/SibJamp2022ProjectGameModeBase.h"
 #include "UI/UserWidgetBase.h"
 
-inline void AGameJamHUD::DrawHUD()
+void AGameJamHUD::DrawHUD()
 {
     Super::DrawHUD();
 #if UE_EDITOR
