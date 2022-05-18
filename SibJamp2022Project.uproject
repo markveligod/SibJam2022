@@ -475,5 +475,8 @@
 			"Name": "Niagara",
 			"Enabled": true
 		}
+	],
+	"TargetPlatforms": [
+		"WindowsNoEditor"
 	]
 }
